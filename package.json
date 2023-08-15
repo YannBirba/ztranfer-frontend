@@ -16,7 +16,7 @@
     "test:ci": "npm run build && vitest run"
   },
   "dependencies": {
-    "@apollo/client": "~3.7.16",
+    "@apollo/client": "~3.8.0",
     "@radix-ui/react-alert-dialog": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.5",
