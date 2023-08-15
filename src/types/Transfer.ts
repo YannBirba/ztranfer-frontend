@@ -1,7 +1,7 @@
 import { File } from "./File";
 import { Link } from "./Link";
 import { User } from "./User";
-
+// if isPrivate is true, then users will be populated, otherwise link will be populated
 export type Transfer = {
   id: number;
   name: string;
@@ -10,13 +10,7 @@ export type Transfer = {
   updatedAt: string;
   createdBy: User;
   files?: File[];
-} & (
-  | {
-      isPrivate: true;
-      users: User[];
-    }
-  | {
-      isPrivate: false;
-      link: Link;
-    }
-);
+  users?: User[];
+  link?: Link;
+  isPrivate: boolean;
+};

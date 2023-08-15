@@ -1,0 +1,116 @@
+.downloadView {
+  min-height: calc(100vh - $footerHeight - $headerHeight);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  padding: 30px;
+}
+
+.downloadView__title {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.downloadView__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin-inline: auto;
+  padding: 25px;
+  border-radius: 35px;
+
+  p {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+  }
+}
+
+.downloadView__infos {
+  color: $linkHoverColor;
+  font-style: italic;
+}
+
+.downloadView__filesTitle {
+  text-align: center;
+}
+
+.downloadView__filesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.downloadView__checkboxContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.downloadView__files {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 10px;
+  margin-block: 25px;
+  width: 1200px;
+  max-width: 100%;
+  margin-inline: auto;
+  overflow-y: scroll;
+
+  .downloadView__file {
+    display: flex;
+    gap: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border-radius: 35px;
+    position: relative;
+    width: 100%;
+
+    label {
+      justify-self: center;
+    }
+
+    label span {
+      width: 20ch;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.downloadViewFiles__downloadAll {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $accentuatedMainColor;
+  color: $linkHoverColor;
+  padding: 25px;
+  border-radius: 9999999999px;
+  &:hover {
+    background-color: $mainColor;
+  }
+}
+
+.downloadView__file__actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+  align-items: center;
+
+  button {
+    background: $mainColor;
+    padding: 10px;
+    border-radius: 9999999999px;
+  }
+}

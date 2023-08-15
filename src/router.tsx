@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
         errorElement: <ErrorView />,
       },
       {
-        path: "download/:token",
+        path: "download",
         element: <DownloadView />,
         errorElement: <ErrorView />,
       },

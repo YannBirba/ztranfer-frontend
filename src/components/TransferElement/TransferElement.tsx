@@ -23,7 +23,7 @@ import { useDownloadAllTransferFiles } from "../../hooks/useDownloadAllTransferF
 import { File } from "../../types/File";
 import { Transfer } from "../../types/Transfer";
 import { User } from "../../types/User";
-import { formatDateToLocalFrenchHour } from "../../utils/date";
+import { formatDateTimeToFrenchFormat } from "../../utils/date";
 import { getFormData } from "../../utils/forms";
 import { EditFilesForm } from "../../views/Transfers/components/EditFilesForm/EditFilesForm";
 import { EditTransferForm } from "../../views/Transfers/components/EditTransferForm/EditTransferForm";
@@ -56,8 +56,8 @@ export const TransferElement = ({
     deleteCurrentUserTransfer
   );
   const { createToast } = useToast();
-  const createdAt = formatDateToLocalFrenchHour(transfer.createdAt);
-  const updatedAt = formatDateToLocalFrenchHour(transfer.updatedAt);
+  const createdAt = formatDateTimeToFrenchFormat(transfer.createdAt);
+  const updatedAt = formatDateTimeToFrenchFormat(transfer.updatedAt);
   const isoStringCreatedAt = new Date(transfer.createdAt).toISOString();
   const isoStringUpdatedAt = new Date(transfer.updatedAt).toISOString();
   const [doUpdateMutation, { loading: isUpdateLoading }] = useMutation<{
@@ -153,14 +153,12 @@ export const TransferElement = ({
             updatedAt: response.updateCurrentUserTransfer.updatedAt,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             users: transfer.isPrivate
-              ? // @ts-expect-error users sould be defined
-                response.updateCurrentUserTransfer.users
+              ? response.updateCurrentUserTransfer.users
               : undefined,
             files: response.updateCurrentUserTransfer.files,
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             link: !transfer.isPrivate
-              ? // @ts-expect-error link sould be defined
-                response.updateCurrentUserTransfer.link
+              ? response.updateCurrentUserTransfer.link
               : undefined,
           };
         });
@@ -246,10 +244,11 @@ export const TransferElement = ({
     }
     const token = response.data?.getCurrentUserTransferLink.token;
     if (token) {
-      const encodedToken = token.replaceAll(".", "-");
+      const encodedToken = token.split(".");
+
       try {
         await navigator.clipboard.writeText(
-          `${window.location.origin}/download/${encodedToken}`
+          `${window.location.origin}/download?token=${encodedToken[0]}&token=${encodedToken[1]}&token=${encodedToken[2]}`
         );
         createToast({
           id: "copyLinkSuccess",

@@ -1,14 +1,15 @@
+import { useQuery } from "@apollo/client";
 import { Download } from "lucide-react";
 import { LegacyRef, forwardRef, useMemo, useRef, useState } from "react";
-import { useQuery } from "@apollo/client";
-import { File } from "../../../../types/File";
-import styles from "./ShowTransferFiles.module.scss";
 import { Button } from "../../../../components/Button/Button";
-import { humanFileSize } from "../../../../utils/file";
 import { InputGroup } from "../../../../components/InputGroup/InputGroup";
-import { useFiles } from "../../../../hooks/useFiles";
-import { getCurrentUserTransferFiles } from "../../../../graphql/transfer/getCurrentUserTransferFiles";
 import { Loader } from "../../../../components/Loader/Loader";
+import { getCurrentUserTransferFiles } from "../../../../graphql/transfer/getCurrentUserTransferFiles";
+import { useFiles } from "../../../../hooks/useFiles";
+import { File } from "../../../../types/File";
+import { humanFileSize } from "../../../../utils/file";
+import styles from "./ShowTransferFiles.module.scss";
+import { formatDateToFrenchFormat } from "../../../../utils/date";
 
 export type ShowTransferFilesProps = {
   transferId: number;
@@ -152,12 +153,8 @@ export const ShowTransferFiles = forwardRef(
                   />
                 </div>
                 <p>
-                  {new Date(file.createdAt).toLocaleDateString("fr-FR", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}{" "}
-                  - {humanFileSize(file.size)}
+                  {formatDateToFrenchFormat(file.createdAt)} -{" "}
+                  {humanFileSize(file.size)}
                 </p>
               </div>
             ))
