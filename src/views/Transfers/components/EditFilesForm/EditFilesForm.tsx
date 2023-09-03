@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
+import axios, { AxiosProgressEvent } from "axios";
 import { Trash2, Upload, X } from "lucide-react";
 import {
   ChangeEvent,
@@ -8,19 +9,18 @@ import {
   useRef,
   useState,
 } from "react";
-import axios, { AxiosProgressEvent } from "axios";
 import { Button } from "../../../../components/Button/Button";
-import styles from "./EditFilesForm.module.scss";
 import { Loader } from "../../../../components/Loader/Loader";
-import { File } from "../../../../types/File";
 import { ProgressBar } from "../../../../components/ProgressBar/ProgressBar";
 import { useToast } from "../../../../contexts/hooks/ToastContext";
-import { UploadFormEvent } from "../../../../types/UploadFormEvent";
-import { UploadFilesResponse } from "../../../../types/UploadFilesResponse";
-import { UploadResponse } from "../../../../types/UploadResponse";
 import { createFile } from "../../../../graphql/file/createFile";
-import { humanFileSize } from "../../../../utils/file";
 import { getCurrentUserTransferFiles } from "../../../../graphql/transfer/getCurrentUserTransferFiles";
+import { File } from "../../../../types/File";
+import { UploadFilesResponse } from "../../../../types/UploadFilesResponse";
+import { UploadFormEvent } from "../../../../types/UploadFormEvent";
+import { UploadResponse } from "../../../../types/UploadResponse";
+import { humanFileSize } from "../../../../utils/file";
+import styles from "./EditFilesForm.module.scss";
 
 export type EditFilesFormProps = {
   isLoading?: boolean;
@@ -251,6 +251,7 @@ export const EditFilesForm = forwardRef(
                     color="#df2525"
                     className={styles.removeFileSvg}
                     onClick={handleRemoveFile}
+                    // @ts-expect-error : id is string but we need number here
                     id={index}
                   />
                 </div>
